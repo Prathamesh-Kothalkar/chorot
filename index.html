@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @media print{
+            body{
+                visibility: hidden;
+            }
+            #ans{
+                visibility: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="sum(event)">
+        Enter First Number <input type="number" id="num1">
+        Enter Second Number <input type="number" id="num2"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <br><br><br>
+    <h5 id="ans"></h5>
+    <br>
+    <button onclick="p()">Print</button>
+</body>
+<script>
+    function sum(event){
+        event.preventDefault();
+        const a=document.getElementById('num1').value;
+        const b=document.getElementById('num2').value;
+        fetch(`http://localhost:3000/sum?a=${a}&b=${b}`)
+        .then((res)=>res.text())
+        .then((data)=>{
+            console.log(data)
+            document.getElementById('ans').innerText=data;
+        })
+        document.getElementById('num1').value="0";
+       document.getElementById('num2').value="0";
+    }
+
+    function p(){
+        print();
+    }
+</script>
+</html>

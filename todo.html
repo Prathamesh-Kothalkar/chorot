@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+</head>
+<script>
+    var globalCount=0;
+    function addTodo(){
+        let title=document.getElementById('title').value;
+        let desc=document.getElementById('desc').value;
+        createTodo(title,desc,++globalCount);
+    }
+
+    function createTodo(title,desc,globalCount){
+        parentElement=document.createElement('div');
+        titleElement=document.createElement('div');
+        descElement=document.createElement('div');
+        buttonElement=document.createElement('button');
+        titleElement.innerHTML =`<h3><b>${title}</b></h3>`;
+        descElement.innerHTML = desc;
+        buttonElement.innerText="Mark as Done"
+        document.getElementById('todos').appendChild(parentElement);
+        parentElement.appendChild(titleElement);
+        parentElement.appendChild(descElement);
+        parentElement.appendChild(buttonElement)
+        buttonElement.setAttribute("onclick", `getBtn(${globalCount})`);
+        parentElement.setAttribute("id", `todo_${globalCount}`);
+    }
+
+    function getBtn(id){
+        let button = document.getElementById(`todo_${id}`).querySelector("button");
+        button.innerText = "Done";
+    }
+</script>
+<body>
+    Enter Title<input type="text" id="title"><br> <br>
+    Enter Desc<input type="text" id="desc"><br> <br>
+    <button onclick="addTodo()">Add todo</button>
+    <div id="todos">
+       
+    </div>
+</body>
+</html>
